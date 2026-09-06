@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Presistence;
 using Presistence.Data;
+using Presistence.Repositories;
+using ServiceAbstraction;
+using ServiceLayer;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -27,6 +30,8 @@ namespace E_Commerce.web
             });
             builder.Services.AddScoped<IDataSeeding,DataSeeding>();
             builder.Services.AddAutoMapper(cfg=> { }, typeof(ServiceLayer.AssemblyReference).Assembly);
+            builder.Services.AddScoped<IUniteOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IServiceManager , ServiceManager>();
             #endregion
 
             var app = builder.Build();
